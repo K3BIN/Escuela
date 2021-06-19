@@ -1,0 +1,90 @@
+INSTITUTO POLITECNICO NACIONAL
+Unidad Profesional Interdisciplinaria de Ingeniería y Ciencias Sociales y Administrativas
+
+Alumno
+Hernández Diaz Kevin Daniel
+
+Materia 
+Administración de Base de Datos 
+
+Boleta 
+20150120502
+
+Secuencia 
+4NV70
+
+Profesor
+Francisco Javier Pingarrón Morales
+
+Trabajo: Evidencia 6
+
+--------------crear las tablas de carrera, secuencia y alumno--------------
+Si toma en cuenta que no cuenta con las demás tablas de donde se sacan las llaves secundarias
+entonces la respuesta sería la siguiente:
+
+create table Grupo 
+(IDGrupo char(4) not null,
+primary key (IDGrupo))
+
+create table Carrera
+(IDCarrera char(1) not null,
+NomCarrera char(30) not null,
+Estado char(1) not null,
+primary key (IDCarrera))
+
+create table Materia
+(IDMateria char(5) not null,
+NomMateria char(30) not null,
+NoCreditos decimal(4,2) not null,
+Semestre decimal(2) not null,
+Estado char(1) not null,
+IDCarrera char(1) not null,
+primary key (IDMateria),
+foreign key (IDCarrera) references Carrera (IDCarrera))
+
+create table Alumno
+(Boleta char(8) not null,
+Nombre char(30) not null,
+PApellido char(30) not null,
+SApellido char(30) null,
+Sexo char(1) not null,
+FechaNac decimal(8) not null,
+Estado char(1) not null,
+IDCarrera char(1) not null,
+primary key (Boleta), 
+foreign key (IDCarrera) references Carrera (IDCarrera))
+
+create table Secuencia
+(IDGrupo char(4) not null,
+IDMateria char(5) not null,
+primary key (IDGrupo, IDMateria),
+foreign key (IDGrupo) references Grupo (IDGrupo),
+foreign key (IDMateria) references Materia (IDMateria))  
+
+------------------En caso de ya contar con las demás tablas------------------
+create table Carrera
+(IDCarrera char(1) not null,
+NomCarrera char(30) not null,
+Estado char(1) not null,
+primary key (IDCarrera))
+
+create table Alumno
+(Boleta char(8) not null,
+Nombre char(30) not null,
+PApellido char(30) not null,
+SApellido char(30) null,
+Sexo char(1) not null,
+FechaNac decimal(8) not null,
+Estado char(1) not null,
+IDCarrera char(1) not null,
+primary key (Boleta), 
+foreign key (IDCarrera) references Carrera (IDCarrera))
+
+create table Secuencia
+(IDGrupo char(4) not null,
+IDMateria char(5) not null,
+primary key (IDGrupo, IDMateria),
+foreign key (IDGrupo) references Grupo (IDGrupo),
+foreign key (IDMateria) references Materia (IDMateria)) 
+
+
